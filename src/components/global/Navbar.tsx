@@ -5,6 +5,7 @@ import React from "react";
 import Atom from "@/components/icons/atom";
 import { useTheme } from "next-themes";
 import { HoverBorderGradient } from "./HoverBorderGradient";
+import { LoginButton } from "../auth/login-button";
 
 const Navbar = () => {
 	const { setTheme, theme } = useTheme();
@@ -12,7 +13,7 @@ const Navbar = () => {
 	return (
 		<nav className="sticky right-0 left-0 top-0 py-4 px-4 backdrop-blur-lg z-[100] border-b-[1px] border-primary">
 			<div className="flex justify-between">
-				<div className="flex">
+				<div className="flex items-center">
 					<Atom />
 					<div className="ml-8">
 						<Links />
@@ -26,12 +27,13 @@ const Navbar = () => {
 					zmien
 				</button>
 				<div className="flex">
+					<LoginButton>
+						<HoverBorderGradient as="button">Login</HoverBorderGradient>
+					</LoginButton>
 					<HoverBorderGradient as="button">
-						<Link href="/">Login</Link>
+						<Link href="/">Register</Link>
 					</HoverBorderGradient>
-					<HoverBorderGradient as="button">
-					<Link href="/">Register</Link>
-					</HoverBorderGradient>
+					{/* <UserAvatar /> */}
 				</div>
 			</div>
 		</nav>

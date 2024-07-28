@@ -1,5 +1,5 @@
-import { FlipWords } from "@/components/FlipWords";
-import Navbar from "@/components/Navbar";
+import { FlipWords } from "@/components/global/FlipWords";
+import Navbar from "@/components/global/Navbar";
 
 export default function Home() {
 	const words = ["effective", "friendly", "transparent"];

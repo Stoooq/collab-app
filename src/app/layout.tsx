@@ -3,6 +3,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
+import AuthProvider from "@/auth/Provider";
 
 const font = DM_Sans({
 	subsets: ["latin"],
@@ -28,14 +29,16 @@ export default function RootLayout({
 					font.variable
 				)}
 			>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="light"
-					enableSystem
-					disableTransitionOnChange
-				>
-					<div className="container">{children}</div>
-				</ThemeProvider>
+				<AuthProvider>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="light"
+						enableSystem
+						disableTransitionOnChange
+					>
+						<div className="container">{children}</div>
+					</ThemeProvider>
+				</AuthProvider>
 			</body>
 		</html>
 	);
