@@ -3,7 +3,6 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
-import AuthProvider from "@/auth/Provider";
 
 const font = DM_Sans({
 	subsets: ["latin"],
@@ -29,7 +28,7 @@ export default function RootLayout({
 					font.variable
 				)}
 			>
-				<AuthProvider>
+				{/* <AuthProvider> */}
 					<ThemeProvider
 						attribute="class"
 						defaultTheme="light"
@@ -38,7 +37,7 @@ export default function RootLayout({
 					>
 						<div className="container">{children}</div>
 					</ThemeProvider>
-				</AuthProvider>
+				{/* </AuthProvider> */}
 			</body>
 		</html>
 	);
