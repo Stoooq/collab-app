@@ -6,7 +6,7 @@ import Atom from "@/components/icons/atom";
 import { useTheme } from "next-themes";
 import { HoverBorderGradient } from "./HoverBorderGradient";
 import { LoginButton } from "../auth/login-button";
-import { signOut } from "next-auth/react";
+import UserAvatar from "./UserAvatar";
 
 
 const Navbar = () => {
@@ -21,8 +21,6 @@ const Navbar = () => {
 						<Links />
 					</div>
 				</div>
-				<button onClick={() => signOut()}>Signout</button>
-				{/* <Wylogoj /> */}
 				<button
 					onClick={() =>
 						theme === "light" ? setTheme("dark") : setTheme("light")

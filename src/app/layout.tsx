@@ -28,16 +28,14 @@ export default function RootLayout({
 					font.variable
 				)}
 			>
-				{/* <AuthProvider> */}
 					<ThemeProvider
 						attribute="class"
 						defaultTheme="light"
 						enableSystem
 						disableTransitionOnChange
 					>
-						<div className="container">{children}</div>
+						<div>{children}</div>
 					</ThemeProvider>
-				{/* </AuthProvider> */}
 			</body>
 		</html>
 	);
