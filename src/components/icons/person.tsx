@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 
-const person = ({ selected }: { selected: boolean }) => {
+const Person = ({ selected }: { selected: boolean }) => {
 	return (
 		<svg
 		width="24"
@@ -22,4 +22,4 @@ const person = ({ selected }: { selected: boolean }) => {
 	);
 };
 
-export default person;
+export default Person;

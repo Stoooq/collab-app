@@ -6,13 +6,7 @@ const layout = ({ children }: PropsWithChildren) => {
 	return (
 		<div className="flex bg-background">
 			<Sidebar />
-			<div className="flex flex-col w-screen">
-				<Infobar />
-				<div className="static">
-					<div className="fixed w-full h-full border-l-primary/30 border-l-2 border-t-primary/30 border-t-2 rounded-2xl"></div>
-					<div className="p-6">{children}</div>
-				</div>
-			</div>
+			<div className="flex flex-col w-screen p-6">{children}</div>
 		</div>
 	);
 };

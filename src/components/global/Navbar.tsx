@@ -7,6 +7,7 @@ import { useTheme } from "next-themes";
 import { HoverBorderGradient } from "./HoverBorderGradient";
 import { LoginButton } from "../auth/login-button";
 import UserAvatar from "./UserAvatar";
+import { signOut } from "next-auth/react";
 
 
 const Navbar = () => {
@@ -28,6 +29,7 @@ const Navbar = () => {
 				>
 					zmien
 				</button>
+				<button onClick={() => signOut()}>wyloguj</button>
 				<div className="flex">
 					<LoginButton>
 						<HoverBorderGradient as="button">Login</HoverBorderGradient>
