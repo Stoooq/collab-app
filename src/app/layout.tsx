@@ -2,7 +2,9 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider, QueryProvider } from "@/utils/Providers";
+import { auth } from "@/auth";
+import { SessionProvider } from "next-auth/react";
 
 const font = DM_Sans({
 	subsets: ["latin"],
@@ -14,29 +16,35 @@ export const metadata: Metadata = {
 	description: "Your Key To Collaboration",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const session = await auth();
+
 	return (
-		<html lang="en" suppressHydrationWarning>
-			<head />
-			<body
-				className={cn(
-					"min-h-screen bg-background font-sans antialiased dark:bg-dot-white/15 bg-dot-black/15",
-					font.variable
-				)}
-			>
-					<ThemeProvider
-						attribute="class"
-						defaultTheme="light"
-						enableSystem
-						disableTransitionOnChange
-					>
-						<div>{children}</div>
-					</ThemeProvider>
-			</body>
-		</html>
+		<SessionProvider session={session}>
+			<html lang="en" suppressHydrationWarning>
+				<head />
+				<body
+					className={cn(
+						"min-h-screen bg-background font-sans antialiased dark:bg-dot-white/15 bg-dot-black/15",
+						font.variable
+					)}
+				>
+					<QueryProvider>
+						<ThemeProvider
+							attribute="class"
+							defaultTheme="light"
+							enableSystem
+							disableTransitionOnChange
+						>
+							{children}
+						</ThemeProvider>
+					</QueryProvider>
+				</body>
+			</html>
+		</SessionProvider>
 	);
 }

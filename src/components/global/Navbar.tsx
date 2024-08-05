@@ -6,12 +6,12 @@ import Atom from "@/components/icons/atom";
 import { useTheme } from "next-themes";
 import { HoverBorderGradient } from "./HoverBorderGradient";
 import { LoginButton } from "../auth/login-button";
-import UserAvatar from "./UserAvatar";
-import { signOut } from "next-auth/react";
-
+import { signOut, useSession } from "next-auth/react";
+import { UseCurrentUser } from "@/hooks/use-current-user";
 
 const Navbar = () => {
 	const { setTheme, theme } = useTheme();
+	const user = UseCurrentUser()
 
 	return (
 		<nav className="sticky right-0 left-0 top-0 py-4 px-4 backdrop-blur-lg z-[100] border-b-[1px] border-primary">
@@ -30,14 +30,21 @@ const Navbar = () => {
 					zmien
 				</button>
 				<button onClick={() => signOut()}>wyloguj</button>
-				<div className="flex">
-					<LoginButton>
-						<HoverBorderGradient as="button">Login</HoverBorderGradient>
-					</LoginButton>
-					<HoverBorderGradient as="button">
-						<Link href="/">Register</Link>
-					</HoverBorderGradient>
-					{/* <UserAvatar /> */}
+				<div className="flex gap-4">
+					{user ? (
+						<HoverBorderGradient as="button">
+							<Link href="/dashboard">Dashboard</Link>
+						</HoverBorderGradient>
+					) : (
+						<>
+							<LoginButton>
+								<HoverBorderGradient as="button">Login</HoverBorderGradient>
+							</LoginButton>
+							<HoverBorderGradient as="button">
+								<Link href="/">Register</Link>
+							</HoverBorderGradient>
+						</>
+					)}
 				</div>
 			</div>
 		</nav>

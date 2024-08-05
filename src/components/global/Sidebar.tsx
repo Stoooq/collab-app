@@ -19,7 +19,7 @@ import Person from "../icons/person";
 const Sidebar = () => {
 	return (
 		<nav className="sticky top-0 h-screen flex flex-col justify-center p-6">
-			<div className="border-[1px] border-primary/20 rounded-2xl py-6">
+			<div className="border-[1px] border-primary/20 rounded-xl py-6">
 				<div className="p-4">
 					<Link href="/">Collab</Link>
 				</div>

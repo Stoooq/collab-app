@@ -7,7 +7,7 @@ interface CardWrapperProps {
 
 const CardWrapper = ({ children, headerLabel }: CardWrapperProps) => {
 	return (
-		<div className="border-[1px] border-primary/20 rounded-xl w-full">
+		<div className="border-[1px] border-primary/20 rounded-lg w-full">
 			<div className="flex justify-center w-full border-b-[1px] border-primary/20">
 				<p className="text-4xl font-bold py-4">{headerLabel}</p>
 			</div>

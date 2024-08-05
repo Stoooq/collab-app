@@ -1,19 +1,21 @@
 import CardWrapper from "@/components/global/CardWrapper";
-import React from "react";
+import UserSettingsInfo from "@/components/global/settings/UserSettingsInfo";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { currentUser } from "@/lib/auth";
 
-const SettingsPage = () => {
+const SettingsPage = async () => {
+	const user = await currentUser()
+
 	return (
 		<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-			<div className="flex flex-col w-full col-span-2">
-				<CardWrapper headerLabel="YOUR SETTINGS">
-          cos
-        </CardWrapper>
-			</div>
-			<div className="flex flex-col w-full">
-				<CardWrapper headerLabel="YOUR SETTINGS">
-          cos
-        </CardWrapper>
-			</div>
+			<Card className="col-span-2">
+				<CardHeader>
+					<CardTitle>User Informations</CardTitle>
+				</CardHeader>
+				<Separator />
+				<UserSettingsInfo User={user} />
+			</Card>
 		</div>
 	);
 };
