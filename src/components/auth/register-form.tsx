@@ -20,14 +20,12 @@ import { FormSuccess } from "./form-success";
 import { register } from "@/actions/register";
 import { useState, useTransition } from "react";
 
-export type RegisterSchemaType = z.infer<typeof RegisterSchema>;
-
 export const RegisterForm = () => {
     const [error, setError] = useState<string | undefined>("")
     const [success, setSuccess] = useState<string | undefined>("")
 	const [isPending, startTransition] = useTransition();
 
-	const form = useForm<RegisterSchemaType>({
+	const form = useForm<z.infer<typeof RegisterSchema>>({
 		resolver: zodResolver(RegisterSchema),
 		defaultValues: {
 			email: "",
@@ -36,7 +34,7 @@ export const RegisterForm = () => {
 		},
 	});
 
-	const onSubmit = (values: RegisterSchemaType) => {
+	const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
 		startTransition(() => {
 			register(values).then((data) => {
                 setError(data.error)

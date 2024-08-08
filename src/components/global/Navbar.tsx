@@ -6,12 +6,12 @@ import Atom from "@/components/icons/atom";
 import { useTheme } from "next-themes";
 import { HoverBorderGradient } from "./HoverBorderGradient";
 import { LoginButton } from "../auth/login-button";
-import { signOut, useSession } from "next-auth/react";
-import { UseCurrentUser } from "@/hooks/use-current-user";
+import { signOut } from "next-auth/react";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 const Navbar = () => {
 	const { setTheme, theme } = useTheme();
-	const user = UseCurrentUser()
+	const { data: user } = useCurrentUser();
 
 	return (
 		<nav className="sticky right-0 left-0 top-0 py-4 px-4 backdrop-blur-lg z-[100] border-b-[1px] border-primary">
@@ -32,9 +32,12 @@ const Navbar = () => {
 				<button onClick={() => signOut()}>wyloguj</button>
 				<div className="flex gap-4">
 					{user ? (
-						<HoverBorderGradient as="button">
-							<Link href="/dashboard">Dashboard</Link>
-						</HoverBorderGradient>
+						<>
+							{user.name}
+							<HoverBorderGradient as="button">
+								<Link href="/dashboard">Dashboard</Link>
+							</HoverBorderGradient>
+						</>
 					) : (
 						<>
 							<LoginButton>

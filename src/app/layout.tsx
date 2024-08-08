@@ -29,7 +29,7 @@ export default async function RootLayout({
 				<head />
 				<body
 					className={cn(
-						"min-h-screen bg-background font-sans antialiased dark:bg-dot-white/15 bg-dot-black/15",
+						"max-w-[1800px] mx-auto min-h-screen bg-background font-sans antialiased dark:bg-dot-white/15 bg-dot-black/15",
 						font.variable
 					)}
 				>

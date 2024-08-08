@@ -28,8 +28,6 @@ import {
 	InputOTPSlot,
 } from "../ui/input-otp";
 
-export type LoginSchemaType = z.infer<typeof LoginSchema>;
-
 export const LoginForm = () => {
 	const searchParams = useSearchParams();
 	const urlError =
@@ -42,7 +40,7 @@ export const LoginForm = () => {
 	const [success, setSuccess] = useState<string | undefined>("");
 	const [isPending, startTransition] = useTransition();
 
-	const form = useForm<LoginSchemaType>({
+	const form = useForm<z.infer<typeof LoginSchema>>({
 		resolver: zodResolver(LoginSchema),
 		defaultValues: {
 			email: "",
@@ -50,7 +48,7 @@ export const LoginForm = () => {
 		},
 	});
 
-	const onSubmit = (values: LoginSchemaType) => {
+	const onSubmit = (values: z.infer<typeof LoginSchema>) => {
 		startTransition(() => {
 			login(values)
 				.then((data) => {

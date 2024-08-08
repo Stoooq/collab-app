@@ -15,18 +15,21 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import Folder from "../icons/folder";
 import Person from "../icons/person";
+import UserAvatar from "./UserAvatar";
+import { Card } from "../ui/card";
 
 const Sidebar = () => {
 	return (
-		<nav className="sticky top-0 h-screen flex flex-col justify-center p-6">
-			<div className="border-[1px] border-primary/20 rounded-xl py-6">
-				<div className="p-4">
+		<nav className="sticky top-0 h-screen flex flex-col justify-center pl-6">
+			<Card className="flex flex-col items-center p-2 gap-4">
+				{/* <div className="">
 					<Link href="/">Collab</Link>
-				</div>
-				<div className="flex flex-col items-center px-4 gap-4">
+				</div> */}
+				<UserAvatar />
+				<div className="flex flex-col items-center gap-4">
 					<Links />
 				</div>
-			</div>
+			</Card>
 		</nav>
 	);
 };
@@ -38,11 +41,11 @@ const Links = () => {
 
 	const links = [
 		{ label: "Dashboard", href: "/dashboard", component: Home },
+		{ label: "Projects", href: "/projects", component: Folder },
 		{ label: "Settings", href: "/settings", component: Settings },
 		{ label: "Payment", href: "/payment", component: Payment },
 		{ label: "Database", href: "/database", component: Database },
-		{ label: "Projects", href: "/projects", component: Folder },
-    { label: "Groups", href: "/groups", component: Person }
+		{ label: "Groups", href: "/groups", component: Person },
 	];
 
 	return (
@@ -56,7 +59,7 @@ const Links = () => {
 									<Link
 										href={link.href}
 										className={clsx(
-											"group h-8 w-8 flex items-center justify-center scale-[1.5] rounded-lg p-[3px] cursor-pointer",
+											"group h-full w-full flex items-center justify-center scale-[1.5] rounded-sm cursor-pointer",
 											{
 												"dark:bg-purple-900 bg-purple-200":
 													pathName === link.href,

@@ -1,7 +1,17 @@
 import { z } from "zod"
 
 export const SettingsSchema = z.object({
-    name: z.optional(z.string())
+    name: z.optional(z.string()),
+    email: z.optional(z.string().email()),
+    password: z.optional(z.string().min(6)),
+    newPassword: z.optional(z.string().min(6)),
+    isTwoFactorEnabled: z.optional(z.boolean()),
+}).refine((data) => {
+    if (data.password && !data.newPassword) return false
+
+    if (!data.password && data.newPassword) return false
+
+    return true
 })
 
 export const NewPasswordSchema = z.object({
