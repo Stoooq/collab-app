@@ -13,11 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum UserRole {
-  ADMIN
-  USER
-}
-
 model User {
   id                    String                 @id @default(cuid())
   name                  String?
@@ -25,13 +20,14 @@ model User {
   emailVerified         DateTime?
   image                 String?
   password              String?
-  role                  UserRole               @default(USER)
   accounts              Account[]
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  UserOnProject UserOnProject[]
 }
 
 model Account {
@@ -91,4 +87,45 @@ model TwoFactorConfirmation {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
+}
+
+enum RoleType {
+  ADMIN
+  USER
+}
+
+model Project {
+  id          String           @id @default(cuid())
+  title       String
+  description String
+  members     UserOnProject[]
+  textFiles   TextFile[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TextFile {
+  id          String   @id @default(cuid())
+  name        String
+  content     String   @db.Text
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserOnProject {
+  id        String   @id @default(cuid())
+  userId    String
+  projectId String
+  role      RoleType
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, projectId])
 }

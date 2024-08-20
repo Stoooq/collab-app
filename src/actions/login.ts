@@ -17,10 +17,7 @@ import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
 	const validation = LoginSchema.safeParse(values);
-
-	if (!validation.success) {
-		return { error: "Invalid fields" };
-	}
+	if (!validation.success) return { error: "Invalid fields" }
 
 	const { email, password, code } = validation.data;
 

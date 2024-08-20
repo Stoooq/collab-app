@@ -1,5 +1,11 @@
 import { z } from "zod"
 
+export const ProjectSchema = z.object({
+    userId: z.string(),
+    title: z.string(),
+    description: z.string(),
+})
+
 export const SettingsSchema = z.object({
     name: z.optional(z.string()),
     email: z.optional(z.string().email()),
